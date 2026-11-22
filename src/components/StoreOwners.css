@@ -1,0 +1,178 @@
+.store {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 0 calc(var(--page-edge) + 100px);
+  background: var(--background-300);
+}
+
+.store__inner {
+  width: 100%;
+  max-width: 1236px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 64px 0;
+  background: var(--background-100);
+  box-shadow: inset 1px 0 0 var(--border-normal), inset -1px 0 0 var(--border-normal);
+}
+
+.store__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 520px;
+  text-align: center;
+}
+
+.store__title .section-title,
+.store__title .section-desc {
+  width: 100%;
+}
+
+.store__cta {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 16px;
+}
+
+.store__box {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.store__box-label {
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--neutral-500);
+  opacity: 0.7;
+}
+
+.store__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--border-lighter);
+  overflow: hidden;
+}
+
+.carry {
+  align-self: start;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 32px;
+  overflow: hidden;
+  border-right: 1px solid var(--border-normal);
+}
+
+.carry:last-child {
+  border-right: 0;
+}
+
+.carry__icon {
+  display: flex;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--background-300);
+  flex-shrink: 0;
+}
+
+.carry__head {
+  flex: 1 0 0;
+  min-width: 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.carry__head .card-title {
+  width: 193px;
+}
+
+.store__link {
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--primary-500);
+}
+
+.store__link {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--duration-fast) var(--ease-out);
+}
+
+.store__link:hover {
+  text-decoration-color: currentColor;
+}
+
+@media (max-width: 1199px) {
+  .store {
+    padding: 0 var(--gutter);
+  }
+
+  .store__title {
+    max-width: 568px; /* 520px content + 24px side padding */
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .store__grid {
+    grid-template-columns: minmax(0, 1fr);
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .carry {
+    border-right: 0;
+  }
+
+  .carry:not(:last-child) {
+    border-bottom: 1px solid var(--border-normal);
+  }
+
+  .carry__head .card-title {
+    width: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .store {
+    padding: 0;
+  }
+
+  .store__inner {
+    padding: 48px 0;
+    gap: 32px;
+    box-shadow: none;
+  }
+
+  .store__title {
+    padding: 0 var(--gutter);
+  }
+
+  .carry {
+    padding: 24px var(--gutter);
+    gap: 16px;
+  }
+
+  .carry__icon {
+    padding: 12px;
+  }
+
+  .store__link {
+    padding: 0 var(--gutter);
+    font-size: 15px;
+  }
+}

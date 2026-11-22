@@ -1,0 +1,413 @@
+.how {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+  padding: 64px calc(var(--page-edge) + 100px);
+  background: #ffffff;
+}
+
+.how__top {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  border-bottom: 1px solid var(--border-normal);
+}
+
+.how__title {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 490px;
+}
+
+.how__steps {
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.step {
+  flex: 1 0 0;
+  min-width: 1px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 40px 32px;
+  overflow: hidden;
+  background: var(--background-200);
+  border-top: 1px solid var(--border-normal);
+  border-left: 1px solid var(--border-normal);
+  transition: background-color var(--duration-base) var(--ease-out);
+}
+
+.step:first-child {
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+
+.step:last-child {
+  border-right: 1px solid var(--border-normal);
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.step--active {
+  background: var(--background-100);
+}
+
+.step__top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.step__num {
+  display: flex;
+  padding: 2px;
+  border-radius: 8px;
+  background: linear-gradient(to bottom, var(--neutral-100), #f5f5f5);
+  filter: drop-shadow(0 0 0.5px rgba(0, 0, 0, 0.08)) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08));
+}
+
+.step__num-inner {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: linear-gradient(to top, var(--neutral-100), #ededed);
+}
+
+.step__num-text {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 0.5px);
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 1.2;
+  letter-spacing: 0.64px;
+  color: var(--primary-500);
+  white-space: nowrap;
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.step--active .step__num-text {
+  color: var(--neutral-500);
+}
+
+.step__ring {
+  position: relative;
+  display: flex;
+  padding: 2px;
+  border-radius: 40px;
+  background: linear-gradient(to bottom, #f5f5f5, var(--neutral-100));
+  box-shadow:
+    inset 0 0 0 1px var(--background-100),
+    inset 0 0 4px 0 rgba(0, 0, 0, 0.06);
+  transition: filter var(--duration-base) var(--ease-out);
+}
+
+.step--active .step__ring {
+  filter: drop-shadow(0 0 0.5px rgba(0, 0, 0, 0.08));
+}
+
+/* The ring's blue crescent (Figma: left side when idle, right side when active).
+   Drawn as a one-sided border on a circle and rotated, so on hover it sweeps
+   around the ring from left to right. Rotation = transform only, interruptible;
+   ease-in-out because it moves across the screen rather than entering. */
+.step__ring::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 0 solid transparent;
+  border-left: 1px solid var(--primary-500);
+  pointer-events: none;
+  transition:
+    transform 450ms var(--ease-in-out),
+    border-left-color 450ms var(--ease-in-out),
+    border-left-width 450ms var(--ease-in-out);
+}
+
+.step--active .step__ring::after {
+  transform: rotate(180deg);
+  border-left-width: 2px;
+  border-left-color: rgba(36, 101, 222, 0.53);
+}
+
+.step__ring-inner {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-radius var(--duration-base) var(--ease-out);
+}
+
+/* Active wash (white -> primary-100). Gradients can't transition, so fade an overlay. */
+.step__ring-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--neutral-100), var(--primary-100));
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.step--active .step__ring-inner {
+  border-radius: 40px;
+}
+
+.step--active .step__ring-inner::before {
+  opacity: 1;
+}
+
+/* Icons are single-colour strokes, painted through a mask so the colour can transition:
+   navy (#0E2859) when idle, primary blue when the card is hovered/active. */
+.step__icon {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 0.5px);
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+  background-color: #0e2859;
+  -webkit-mask: var(--icon) center / 20px 20px no-repeat;
+  mask: var(--icon) center / 20px 20px no-repeat;
+  transition: background-color var(--duration-base) var(--ease-out);
+}
+
+.step__icon--rotate {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.step--active .step__icon {
+  background-color: var(--primary-500);
+}
+
+.step__content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.step__content .card-title {
+  white-space: nowrap;
+}
+
+/* Stats */
+.stats {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 32px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--background-100);
+}
+
+.stats__glow {
+  position: absolute;
+  right: -55.31px;
+  top: -28.05px;
+  width: 1334.808px;
+  height: 277.375px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.stats__glow-rot {
+  flex: none;
+  transform: scaleY(-1) rotate(2.05deg);
+}
+
+.stats__glow-box {
+  position: relative;
+  width: 1327.439px;
+  height: 230.141px;
+}
+
+.stats__glow-box img {
+  position: absolute;
+  inset: -31.5% -5.46%;
+  width: calc(100% + 10.92%);
+  height: calc(100% + 63%);
+}
+
+.stats__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 126px;
+  height: 102px;
+}
+
+.stat {
+  flex: 1 0 0;
+  min-width: 1px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.stat__value {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 48px;
+  letter-spacing: -3px;
+  color: var(--primary-500);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.stat__unit {
+  color: #212833;
+}
+
+.stat__label {
+  font-size: 15px;
+  line-height: 23px;
+  color: var(--neutral-500);
+  opacity: 0.75;
+  text-align: center;
+  white-space: pre;
+}
+
+.how__footnote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--neutral-500);
+  text-align: center;
+}
+
+.how__footnote-label {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.how__footnote-text {
+  width: 696px;
+  font-size: 12px;
+  line-height: 1.5;
+  opacity: 0.7;
+}
+
+/* Long titles ("Approve each purchase") wrap once columns get narrower than the design. */
+@media (max-width: 1439px) {
+  .step__content .card-title {
+    white-space: normal;
+  }
+}
+
+/* Tablet: 2x2 grid with an outer rounded border; inner dividers via each step's edges. */
+@media (max-width: 1199px) {
+  .how {
+    padding: 56px var(--gutter);
+  }
+
+  .how__title {
+    width: 100%;
+    max-width: 490px;
+  }
+
+  .how__top {
+    border-bottom: 0;
+  }
+
+  .how__steps {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .how__steps::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--border-normal);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .step,
+  .step:first-child,
+  .step:last-child {
+    border: 0;
+    border-radius: 0;
+  }
+
+  .step:nth-child(odd) {
+    border-right: 1px solid var(--border-normal);
+  }
+
+  .step:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--border-normal);
+  }
+
+  .stats__inner {
+    gap: 24px;
+  }
+
+  .how__footnote-text {
+    width: 100%;
+    max-width: 696px;
+  }
+}
+
+@media (max-width: 767px) {
+  .how {
+    gap: 24px;
+    padding: 48px var(--gutter);
+  }
+
+  .how__top {
+    gap: 24px;
+  }
+
+  .how__steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .step {
+    padding: 28px 24px;
+    gap: 20px;
+  }
+
+  .step:nth-child(odd) {
+    border-right: 0;
+  }
+
+  .step:not(:last-child) {
+    border-bottom: 1px solid var(--border-normal);
+  }
+
+  .stats {
+    padding: 32px 20px;
+  }
+
+  .stats__inner {
+    flex-direction: column;
+    height: auto;
+    gap: 28px;
+  }
+
+  .stat {
+    height: auto;
+  }
+}

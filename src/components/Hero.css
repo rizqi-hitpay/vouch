@@ -1,0 +1,434 @@
+.hero {
+  /* One-off marketing reveal, so it may exceed the 300ms UI budget; strong ease-out. */
+  --reveal-duration: 600ms;
+  --reveal-ease: var(--ease-out);
+  position: relative;
+  /* Collapsed (Figma 163:392): 800px, clipping the Add Vouch card.
+     Expanded on scroll (Figma 146:925): 1105px, card fully visible. */
+  height: 800px;
+  overflow: hidden;
+  transition: height var(--reveal-duration) var(--reveal-ease);
+  background: var(--background-300);
+}
+
+.hero--expanded {
+  height: 1105px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    --reveal-duration: 0ms;
+  }
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(0deg, #e6f7fe 0.755%, rgba(227, 220, 231, 0.47) 42.39%, rgba(255, 255, 255, 0) 84.025%),
+    var(--background-300);
+}
+
+/* Header */
+.header {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1344px, calc(100% - 96px));
+  height: 72px;
+  z-index: 2;
+}
+
+/* Pinned copy: appears once the page is scrolled past 500px.
+   Enter slides down with ease-out; exit is quicker so it gets out of the way. */
+.header--fixed {
+  position: fixed;
+  top: 8px;
+  z-index: 50;
+  transform: translate(-50%, calc(-100% - 8px));
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    opacity var(--duration-base) var(--ease-out),
+    visibility 0s linear var(--duration-base);
+}
+
+.header--fixed.header--visible {
+  transform: translate(-50%, 0);
+  opacity: 1;
+  visibility: visible;
+  transition:
+    transform 300ms var(--ease-out),
+    opacity 300ms var(--ease-out),
+    visibility 0s;
+}
+
+/* Pinned header: compact logo (80% of the hero size, aspect ratio kept). */
+.header--fixed .header__logo img {
+  width: 92.75px;
+  height: 25.6px;
+}
+
+/* Pinned header: the CTA switches to the dark primary style. Same 42px height and even
+   padding as the light version, so the pill doesn't change size. */
+.header--fixed .header__cta {
+  height: 42px;
+  padding: 10px 20px;
+}
+
+.header--fixed .header__pill {
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow:
+    inset 0 0 0 1px rgba(221, 224, 228, 0.7),
+    0 8px 24px rgba(3, 16, 47, 0.06);
+}
+
+.header__pill {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0;
+  border-radius: 100px;
+  overflow: hidden;
+  backdrop-filter: blur(60px);
+  -webkit-backdrop-filter: blur(60px);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.header__menu {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-link {
+  font-size: 14px;
+  line-height: normal;
+  color: var(--dark-500);
+  white-space: nowrap;
+}
+
+.nav-link {
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.nav-link:hover,
+.nav-link.is-active {
+  color: var(--primary-500);
+}
+
+/* Intro */
+.hero__content {
+  position: absolute;
+  top: 160px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 684px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.hero__tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 40px;
+  background: var(--neutral-100);
+  filter: drop-shadow(0 8px 11px rgba(0, 0, 0, 0.04));
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: var(--text-500);
+  white-space: nowrap;
+}
+
+.hero__tag-dot {
+  font-family: 'Hauora', var(--font-sans);
+}
+
+.hero__text {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 72px;
+  line-height: 0.78;
+  text-align: center;
+  color: var(--dark-500);
+}
+
+.hero__lead {
+  max-width: 570px;
+  margin: 0 auto;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--dark-400);
+}
+
+.hero__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding-top: 8px;
+}
+
+.hero__buttons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hero__note {
+  width: 577px;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--dark-400);
+  opacity: 0.6;
+}
+
+/* ---------- Tablet / mobile menu ---------- */
+.header__toggle {
+  display: none;
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  border: 1px solid var(--border-normal);
+  background: linear-gradient(to bottom, #fbfbfb, #ffffff);
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+  transition: transform var(--duration-press) var(--ease-out);
+}
+
+.header__toggle:active {
+  transform: scale(0.97);
+}
+
+.header__toggle:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+}
+
+.header__toggle-bar {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  height: 1.5px;
+  border-radius: 1px;
+  background: var(--dark-500);
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.header__toggle-bar:first-child {
+  transform: translateY(-3.5px);
+}
+
+.header__toggle-bar:last-child {
+  transform: translateY(3.5px);
+}
+
+.header--menu-open .header__toggle-bar:first-child {
+  transform: rotate(45deg);
+}
+
+.header--menu-open .header__toggle-bar:last-child {
+  transform: rotate(-45deg);
+}
+
+/* Dropdown card: scale + fade from the top (transform/opacity only, ease-out). */
+.header__panel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  flex-direction: column;
+  padding: 8px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow:
+    inset 0 0 0 1px rgba(221, 224, 228, 0.7),
+    0 12px 32px rgba(3, 16, 47, 0.1);
+  transform-origin: top center;
+  transform: translateY(-4px) scale(0.98);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    opacity var(--duration-fast) var(--ease-out),
+    visibility 0s linear var(--duration-fast);
+}
+
+.header--menu-open .header__panel {
+  transform: none;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    opacity var(--duration-base) var(--ease-out),
+    visibility 0s;
+}
+
+.header__panel-link {
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 16px;
+  line-height: 1.35;
+  color: var(--dark-500);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.header__panel-link:hover {
+  background: var(--background-300);
+}
+
+.header__panel-link.is-active {
+  color: var(--primary-500);
+}
+
+.header__panel .header__cta {
+  margin-top: 8px;
+  width: 100%;
+  height: 46px;
+}
+
+@media (max-width: 1023px) {
+  .header__menu {
+    display: none;
+  }
+
+  .header__toggle {
+    display: block;
+  }
+
+  .header__panel {
+    display: flex;
+  }
+
+  .header--fixed .header__pill,
+  .header--fixed .header__panel {
+    background: rgba(255, 255, 255, 0.9);
+  }
+}
+
+@media (max-width: 767px) {
+  .header {
+    top: 12px;
+    width: calc(100% - 24px);
+    height: 64px;
+  }
+
+  .header--fixed {
+    top: 8px;
+    width: calc(100% - 16px);
+  }
+
+  .header__pill {
+    padding: 11px 0;
+  }
+
+  .header__inner {
+    padding: 0 11px 0 20px;
+  }
+
+  .header__logo img {
+    width: 92.75px;
+    height: 25.6px;
+  }
+}
+
+/* ---------- Hero: flow layout below 1024px (card always fully shown) ---------- */
+@media (max-width: 1023px) {
+  .hero,
+  .hero--expanded {
+    height: auto;
+    padding: 136px var(--gutter) 64px;
+  }
+
+  .hero__content {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: 684px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero,
+  .hero--expanded {
+    padding-top: 112px;
+    padding-bottom: 48px;
+  }
+
+  .hero__content {
+    gap: 20px;
+  }
+
+  .hero__tag {
+    height: auto;
+    min-height: 32px;
+    padding: 6px 12px;
+    gap: 6px;
+    font-size: 9px;
+    letter-spacing: 0.5px;
+  }
+
+  .hero__text {
+    gap: 20px;
+  }
+
+  .hero__title {
+    font-size: 48px;
+    line-height: 0.88;
+  }
+
+  .hero__lead {
+    font-size: 15px;
+  }
+
+  .hero__buttons {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .hero__buttons .btn {
+    width: 100%;
+    height: 46px;
+  }
+
+  .hero__note {
+    width: 100%;
+  }
+}

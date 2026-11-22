@@ -1,0 +1,16 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="1472.44" height="375.146" viewBox="0 0 1472.44 375.146" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Ellipse 483" opacity="0.35" filter="url(#filter0_f_0_42)">
+<path d="M1399.94 181.249C1399.94 214.202 811.25 152.208 707.656 152.208C604.061 152.208 72.5025 331.554 72.5025 298.601C72.5025 265.649 194.551 72.5025 298.145 72.5025C401.739 72.5025 1399.94 148.297 1399.94 181.249Z" fill="url(#paint0_radial_0_42)"/>
+</g>
+<defs>
+<filter id="filter0_f_0_42" x="0" y="0" width="1472.44" height="375.146" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="36.2512" result="effect1_foregroundBlur_0_42"/>
+</filter>
+<radialGradient id="paint0_radial_0_42" cx="0" cy="0" r="1" gradientTransform="matrix(-115.75 -97.8047 236.528 -24.7655 821.987 155.194)" gradientUnits="userSpaceOnUse">
+<stop stop-color="#9ADCF5"/>
+<stop offset="0.873324" stop-color="#EACDFB"/>
+</radialGradient>
+</defs>
+</svg>

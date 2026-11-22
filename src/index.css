@@ -1,0 +1,210 @@
+/* Geist 1.3.0 — the build whose metrics match the Figma file */
+@font-face {
+  font-family: 'Geist';
+  src: url('./assets/fonts/Geist-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('./assets/fonts/GeistMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('./assets/fonts/GeistMono-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Design tokens (Figma variables) */
+  --background-100: #ffffff;
+  --background-200: #fcfdfd;
+  --background-300: #f7f8f9;
+  --border-normal: #dde0e4;
+  --border-lighter: #e3e5e8;
+  --dark-500: #000501;
+  --dark-400: #212833;
+  --neutral-100: #ffffff;
+  --neutral-400: #bcbfc2;
+  --neutral-500: #212833;
+  --neutral-800: #000501;
+  --text-500: #03102f;
+  --primary-100: #e9f0fc;
+  --primary-500: #2465de;
+  --grey-100: #f2f2f4;
+  --grey-800: #343848;
+  --grey-900: #03102f;
+
+  /* Motion (animations.dev principles: ease-out, short, interruptible).
+     The site doesn't publish its curves; these are standard strong ease-out / ease-in-out. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --duration-press: 120ms;
+  --duration-fast: 160ms;
+  --duration-base: 200ms;
+
+  /* Max content container: 1440px. Section backgrounds stay full-bleed; on wider screens
+     this extra inline space centres the 1440px content area (resolves to 0 at <=1440px). */
+  --page-edge: max(0px, (100% - 1440px) / 2);
+
+  --font-sans: 'Geist', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+  --font-display: 'Darker Grotesque', 'Geist', sans-serif;
+
+  font-family: var(--font-sans);
+  color: var(--dark-500);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--background-100);
+}
+
+/* Breakpoints: desktop = Figma (1440). Tablet <=1199, compact header/hero flow <=1023,
+   mobile <=767. Side gutter shrinks with the viewport. */
+@media (max-width: 1199px) {
+  :root {
+    --gutter: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --gutter: 20px;
+  }
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+  font-weight: inherit;
+}
+
+/* Figma "inside" strokes: drawn over the box without taking layout space */
+.stroke-t { box-shadow: inset 0 1px 0 var(--border-normal); }
+.stroke-b { box-shadow: inset 0 -1px 0 var(--border-normal); }
+.stroke-tb { box-shadow: inset 0 1px 0 var(--border-normal), inset 0 -1px 0 var(--border-normal); }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Anchor targets land below the pinned header (top 8 + 74 tall). Sections already have
+   64px top padding, so 40px puts their eyebrow ~22px under the header. */
+section[id] {
+  scroll-margin-top: 40px;
+}
+
+/* Anchor targets receive focus after a jump; don't flash an outline on whole sections. */
+[tabindex='-1']:focus {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: none;
+}
+
+/* Shared type styles */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: var(--primary-500);
+  white-space: nowrap;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 0.85;
+  color: var(--neutral-800);
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--neutral-800);
+}
+
+.body-15 {
+  font-size: 15px;
+  line-height: 23px;
+  color: var(--neutral-500);
+  opacity: 0.7;
+}
+
+.section-desc {
+  padding-top: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--neutral-500);
+  opacity: 0.75;
+}
+
+/* Below desktop, balance headline lines so single words don't dangle
+   (desktop keeps Figma's exact breaks). */
+@media (max-width: 1199px) {
+  .section-title,
+  .hero__title {
+    text-wrap: balance;
+  }
+}
+
+@media (max-width: 767px) {
+  .section-title {
+    font-size: 32px;
+    line-height: 0.9;
+  }
+
+  .card-title {
+    font-size: 24px;
+  }
+}

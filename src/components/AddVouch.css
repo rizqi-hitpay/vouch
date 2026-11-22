@@ -1,0 +1,273 @@
+.add-vouch {
+  scroll-margin-top: 106px; /* pinned header (8 + 74) + 24px gap */
+  position: absolute;
+  top: 628px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 480px;
+  transition: width var(--reveal-duration) var(--reveal-ease);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border: 1px solid #ffffff;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.65);
+  overflow: hidden;
+}
+
+.add-vouch__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.add-vouch__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 496px;
+  height: 51px;
+  flex-shrink: 0;
+}
+
+.add-vouch__title {
+  position: relative;
+  width: 199px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.add-vouch__title-text {
+  position: absolute;
+  left: 99.5px;
+  top: 8px;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1;
+  white-space: pre;
+  text-align: center;
+  color: var(--dark-500);
+}
+
+.add-vouch__title-logo {
+  position: absolute;
+  left: 32.5px;
+  top: 4px;
+}
+
+.add-vouch__sub {
+  width: 100%;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--neutral-500);
+  opacity: 0.7;
+}
+
+.add-vouch__tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.add-vouch__tab {
+  flex: 1 0 0;
+  min-width: 1px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border: 1px solid var(--border-normal);
+  border-radius: 8px;
+  overflow: hidden;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-press) var(--ease-out);
+}
+
+.add-vouch__tab:active {
+  transform: scale(0.97);
+}
+
+.add-vouch__tab:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+}
+
+.add-vouch__tab:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.add-vouch__tab--active,
+.add-vouch__tab--active:hover {
+  background: #ffffff;
+  border-color: var(--primary-500);
+}
+
+.hero--expanded .add-vouch {
+  width: 720px;
+}
+
+/* Tab names appear only once the card has expanded */
+.add-vouch__tab-label {
+  max-width: 0;
+  margin-left: 0;
+  overflow: hidden;
+  opacity: 0;
+  font-size: 14px;
+  line-height: 1.2;
+  color: var(--neutral-500);
+  white-space: nowrap;
+  transition:
+    max-width var(--reveal-duration) var(--reveal-ease),
+    margin-left var(--reveal-duration) var(--reveal-ease),
+    opacity calc(var(--reveal-duration) * 0.6) var(--ease-out);
+}
+
+.hero--expanded .add-vouch__tab-label {
+  max-width: 80px;
+  margin-left: 8px;
+  opacity: 0.5;
+  transition-delay: 0ms, 0ms, calc(var(--reveal-duration) * 0.35);
+}
+
+.hero--expanded .add-vouch__tab--active .add-vouch__tab-label {
+  opacity: 1;
+}
+
+.add-vouch__tab-icon--cover {
+  object-fit: cover;
+}
+
+.add-vouch__icon-box {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+}
+
+.add-vouch__message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+}
+
+.add-vouch__label {
+  width: 100%;
+  min-height: 21px; /* Claude/ChatGPT instructions wrap to two lines */
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--neutral-500);
+  opacity: 0.7;
+}
+
+.add-vouch__snippet {
+  /* 672px = the expanded card's content width; clipped while collapsed, as in Figma */
+  width: 672px;
+  flex-shrink: 0;
+  display: flex;
+  padding: 16px;
+  border-radius: 8px;
+  /* Figma inside stroke: doesn't add to the box height */
+  box-shadow: inset 0 0 0 1px var(--border-lighter);
+  background: var(--neutral-100);
+  overflow: hidden;
+}
+
+.add-vouch__code {
+  margin: 0;
+  flex: 1 0 0;
+  min-width: 1px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--neutral-500);
+  white-space: pre-wrap;
+}
+
+.add-vouch__copy-icon {
+  transform: rotate(180deg);
+}
+
+/* ---------- Tablet / mobile: card sits in the hero flow, full message visible ---------- */
+@media (max-width: 1023px) {
+  .add-vouch,
+  .hero--expanded .add-vouch {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: 720px;
+    margin: 56px auto 0;
+    scroll-margin-top: 96px;
+  }
+
+  .add-vouch__head {
+    width: 100%;
+    height: auto;
+  }
+
+  .add-vouch__snippet {
+    width: 100%;
+    flex-shrink: 1;
+  }
+
+  .add-vouch__code {
+    word-break: break-word;
+  }
+
+  .add-vouch__tab-label {
+    max-width: 80px;
+    margin-left: 8px;
+    opacity: 0.5;
+  }
+
+  .add-vouch__tab--active .add-vouch__tab-label {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 767px) {
+  .add-vouch,
+  .hero--expanded .add-vouch {
+    margin-top: 40px;
+    padding: 20px 16px;
+    border-radius: 20px;
+  }
+
+  /* Five tabs don't fit names at phone width: icons only (names stay for screen readers). */
+  .add-vouch__tab-label,
+  .add-vouch__tab--active .add-vouch__tab-label {
+    max-width: 0;
+    margin-left: 0;
+    opacity: 0;
+  }
+
+  .add-vouch__tabs {
+    gap: 6px;
+  }
+
+  .add-vouch__tab {
+    padding: 6px 4px;
+  }
+
+  .add-vouch__code {
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .add-vouch__message .btn {
+    width: 100%;
+    height: 46px;
+  }
+}
