@@ -91,8 +91,9 @@
   padding: 16px 0;
   border-radius: 100px;
   overflow: hidden;
-  backdrop-filter: blur(60px);
+  /* Prefixed first, standard last: the build keeps only the final declaration of the pair. */
   -webkit-backdrop-filter: blur(60px);
+  backdrop-filter: blur(60px);
 }
 
 .header__inner {
@@ -269,8 +270,9 @@
   padding: 8px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(24px);
+  /* Prefixed first, standard last: the build keeps only the final declaration of the pair. */
   -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
   box-shadow:
     inset 0 0 0 1px rgba(221, 224, 228, 0.7),
     0 12px 32px rgba(3, 16, 47, 0.1);
