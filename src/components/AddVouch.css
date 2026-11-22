@@ -271,3 +271,15 @@
     height: 46px;
   }
 }
+
+/* Page-load reveal: the card arrives last, after the hero copy and buttons. */
+.add-vouch {
+  animation: reveal-in 900ms var(--ease-out) backwards;
+  animation-delay: 780ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .add-vouch {
+    animation: none;
+  }
+}

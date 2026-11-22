@@ -123,6 +123,37 @@ section[id] {
   outline: none;
 }
 
+/* Page-load reveal (hitpayapp.com style): fade + un-blur + small rise, staggered via
+   --reveal-delay. `translate` (not transform) so elements keep their own transforms;
+   fill-mode backwards so no filter lingers after the animation ends. */
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    translate: 0 12px;
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    translate: 0 0;
+  }
+}
+
+.reveal {
+  animation: reveal-in 800ms var(--ease-out) backwards;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal--word {
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
